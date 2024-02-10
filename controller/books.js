@@ -7,7 +7,6 @@ router.post("/add-book", async (req, res) => {
 
   try {
     const newBook = new Book({
-      bookId: "book" + Math.random(),
       title: title,
       price: price,
       description: description,
