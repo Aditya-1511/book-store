@@ -1,17 +1,31 @@
 const express = require("express");
 const router = express.Router();
+const Book = require("../model/bookModel");
 
-// Define routes for books module
-router.get("/", (req, res) => {
-  // Handle GET request for fetching books
-  res.send("List of books");
+router.post("/add-book", async (req, res) => {
+  const { title, description, price, authors } = req.body;
+
+  try {
+    const newBook = new Book({
+      bookId: "book" + Math.random(),
+      title: title,
+      price: price,
+      description: description,
+      authors: authors,
+    });
+
+    await newBook.save();
+
+    const respObj = {
+      message: "Book added successfully",
+      data: newBook,
+    };
+
+    res.send(respObj);
+  } catch (error) {
+    console.error("Error adding book:", error);
+    res.status(500).send("Error adding book");
+  }
 });
-
-router.post("/", (req, res) => {
-  // Handle POST request for creating a new book
-  res.send("Book created");
-});
-
-// More routes for book management can be added here
 
 module.exports = router;
