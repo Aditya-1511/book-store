@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require("../model/userModel");
 const bcrypt = require("bcrypt");
 
-router.post("/signup", async (req, res) => {
+router.post("/retail-user/signup", async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
@@ -19,6 +19,7 @@ router.post("/signup", async (req, res) => {
       username: username,
       email: email,
       password: hashedPassword,
+      userType: 1,
     });
 
     await newUser.save();
