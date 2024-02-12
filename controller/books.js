@@ -27,4 +27,20 @@ router.post("/add-book", async (req, res) => {
   }
 });
 
+router.get("/get-book", async (req, res) => {
+  const { bookId } = req.query;
+  try {
+    const bookDetails = await Book.findById({ _id: bookId });
+    const respObj = {
+      message: "Book details fetched successfully",
+      data: bookDetails,
+    };
+
+    res.send(respObj);
+  } catch (error) {
+    console.error("Error fetching book:", error);
+    res.status(500).send("Error fetching book");
+  }
+});
+
 module.exports = router;
