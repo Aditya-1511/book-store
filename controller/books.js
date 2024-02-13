@@ -86,4 +86,27 @@ router.put("/update-book-details", async (req, res) => {
   }
 });
 
+router.delete("/delete-book", async (req, res) => {
+  const { bookId } = req.query;
+  const getBookDetails = await Book.findById({ _id: bookId });
+
+  if (!getBookDetails) {
+    throw new Error("This book does not exist");
+  }
+
+  if (getBookDetails.is_deleted === 1) {
+    throw new Error("This book has been deleted already");
+  }
+
+  const deleteBook = await Book.updateOne({ _id: bookId }, { is_deleted: 1 });
+
+  if (deleteBook) {
+    const respObj = {
+      message: "The book has been deleted successfully from our records",
+    };
+
+    res.send(respObj);
+  }
+});
+
 module.exports = router;

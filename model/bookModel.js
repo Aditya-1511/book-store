@@ -15,6 +15,10 @@ const bookSchema = new Schema({
   title: String,
   description: String,
   price: Number,
+  is_deleted: {
+    type: Number,
+    default: 0, // 0 = No, 1 = Yes
+  },
 });
 
 const Book = mongoose.model("Book", bookSchema);
