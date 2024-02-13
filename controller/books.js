@@ -109,4 +109,15 @@ router.delete("/delete-book", async (req, res) => {
   }
 });
 
+router.get("/get-all-books", async (req, res) => {
+  const getAllBooks = await Book.find({ is_deleted: 0 });
+
+  const respObj = {
+    message: "All books fetched successfully",
+    data: getAllBooks,
+  };
+
+  res.send(respObj);
+});
+
 module.exports = router;
