@@ -69,4 +69,9 @@ router.post("/author/signup", async (req, res) => {
   }
 });
 
+router.get("/get-all-retail-users", async (req, res) => {
+  const getAllRetailUsers = await User.find({ is_deleted: 0, userType: 1 });
+  res.send(getAllRetailUsers);
+});
+
 module.exports = router;
