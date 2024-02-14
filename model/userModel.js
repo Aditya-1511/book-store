@@ -6,6 +6,10 @@ const userSchema = new Schema({
   email: String,
   password: String,
   userType: Number,
+  is_deleted: {
+    type: Number,
+    default: 0, // 0 =No, 1 =Yes
+  },
 });
 
 const User = mongoose.model("User", userSchema);
