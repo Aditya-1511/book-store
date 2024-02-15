@@ -78,4 +78,13 @@ router.get("/get-all-retail-users", async (req, res) => {
   res.send(respObj);
 });
 
+router.get("/get-all-authors", async (req, res) => {
+  const getAllAuthors = await User.find({ is_deleted: 0, userType: 3 });
+  const respObj = {
+    message: "List of authors fetched successfully",
+    data: getAllAuthors,
+  };
+  res.send(respObj);
+});
+
 module.exports = router;
