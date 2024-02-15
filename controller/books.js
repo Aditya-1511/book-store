@@ -5,6 +5,14 @@ const Book = require("../model/bookModel");
 router.post("/add-book", async (req, res) => {
   const { title, description, price, authors } = req.body;
 
+  if (price > 1000) {
+    throw new Error("Price cannot be greater than 1000");
+  }
+
+  if (price < 100) {
+    throw new Error("Price cannot be less than 100");
+  }
+
   try {
     const newBook = new Book({
       title: title,
