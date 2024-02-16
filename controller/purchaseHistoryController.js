@@ -1,11 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const PurchaseHistory = require("../model/purchaseHistoryModel");
+const mongoose = require("mongoose");
 
 router.get("/get-purchase-detail", async (req, res) => {
-  const { purchaseId } = req.query;
+  const { transactionId } = req.query;
   try {
-    const bookDetails = await Book.findById({ _id: purchaseId });
+    const bookDetails = await PurchaseHistory.findById({
+      _id: new mongoose.Types.ObjectId(transactionId),
+    });
+
     const respObj = {
       message: "Book details fetched successfully",
       data: bookDetails,
