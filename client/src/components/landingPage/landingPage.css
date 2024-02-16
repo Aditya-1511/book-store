@@ -4,16 +4,31 @@
 
 .jumbotron {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
 }
 
 .book-pic {
-  height: 50vh;
+  height: auto;
+  max-width: 100%;
   padding: 15px;
 }
 
 .text-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  text-align: center;
+  margin-top: 15px;
+}
+
+@media screen and (max-width: 480px) {
+  /* For devices like Samsung Galaxy A71 */
+  .jumbotron {
+    flex-direction: column;
+    align-items: center;
+    height: 70vh;
+  }
+
+  .book-pic {
+    height: auto;
+    max-width: 100%;
+  }
 }

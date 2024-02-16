@@ -4,7 +4,7 @@ import "./landingPage.css";
 function LandingPage() {
   return (
     <>
-      <div className="container bg-warning mt-5">
+      <div className="container bg-warning mt-4">
         <div class="jumbotron">
           <div className="book-image">
             <img
