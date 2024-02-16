@@ -29,12 +29,14 @@ process.on("SIGINT", () => {
 
 const usersRouter = require("./controller/users");
 const booksRouter = require("./controller/books");
+const purchaseHistoryRouter = require("./controller/purchaseHistoryController");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/users", usersRouter);
 app.use("/books", booksRouter);
+app.use("/purchaseHistory", purchaseHistoryRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

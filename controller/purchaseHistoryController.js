@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const PuchaseHistory = require("../model/purchaseHistoryModel");
+const PurchaseHistory = require("../model/purchaseHistoryModel");
 
 router.get("/get-purchase-detail", async (req, res) => {
   const { purchaseId } = req.query;
@@ -15,6 +15,29 @@ router.get("/get-purchase-detail", async (req, res) => {
   } catch (error) {
     console.error("Error fetching book:", error);
     res.status(500).send("Error fetching book");
+  }
+});
+
+router.post("/purchase-book", (req, res) => {
+  try {
+    const { bookId, userId, price, quantity } = req.body;
+    const purchase_info = new PurchaseHistory({
+      bookId: bookId,
+      userId: userId,
+      price: price,
+      quantity: quantity,
+    });
+
+    purchase_info.save();
+
+    const respObj = {
+      message: "You have purchased a book successfully",
+      result: purchase_info,
+    };
+
+    res.send(respObj);
+  } catch (error) {
+    throw new Error(error);
   }
 });
 
